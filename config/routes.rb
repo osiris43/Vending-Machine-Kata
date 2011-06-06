@@ -1,4 +1,11 @@
 VendingMachine::Application.routes.draw do
+  resources :items
+
+  match 'pages/deposit' => 'pages#deposit'
+  match 'pages/coin_return' => 'pages#coin_return'
+
+  root :to => 'pages#vending_machine'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

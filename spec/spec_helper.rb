@@ -24,4 +24,9 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  def test_create_balance(balance, amountToDeposit)
+    @attr = {:currentBalance => balance, :amount => amountToDeposit}
+    controller.deposit :params => @attr
+  end
 end

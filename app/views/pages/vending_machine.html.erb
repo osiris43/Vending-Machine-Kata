@@ -1,0 +1,30 @@
+<h1>Vending Machine</h1>
+
+<section>
+  <% flash.each do |key, value| %>
+    <div><%= value %></div>
+  <% end %>
+</section>
+<h3>Current Balance</h3>
+<em id="balance_label"><%= number_to_currency(@balance) %></em><br /><br />
+
+<span>Machine accepts nickels, dimes, quarters and dollars</span><br /><br />
+<form action='/pages/deposit' id='depositForm' method='post'>
+  <select id='moneyOptions'>
+    <option value="5">$.05</option>
+    <option value="10">$.10</option>
+    <option value="25">$.25</option>
+    <option value="100">$1.00</option>
+  </select>
+  
+  <input type="hidden" id="curBalance" value="0" />
+  <input type="submit" id="insertMoney" value="Deposit Coins" />
+
+</form>
+<br />
+<form action="/pages/coin_return" method='get'>
+
+  <input type="submit" id="coinReturnButton" value="Coin Return" action="/pages/coin_return" />
+</form>
+
+  

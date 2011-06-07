@@ -2,10 +2,7 @@ class PagesController < ApplicationController
   attr_accessor :balance
   def vending_machine
     @balance = 0.0
-    @items = Item.find(:all, :group => "description")
-    @items.each do |item| 
-      item.location = "A1"
-    end
+    @items = Item.find(:all, :group => "location")
   end
 
   def deposit 

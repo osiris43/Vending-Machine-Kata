@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Item do
   describe "has validations" do
     before(:each) do
-      @attr = {:description => "Snickers", :price => 0.85}
+      @attr = {:description => "Snickers", :price => 0.85, :location => "A1"}
     end
 
     it "creates a new item" do 
@@ -19,6 +19,11 @@ describe Item do
     it "requires a price" do
       no_price_item = Item.new(@attr.merge(:price => 0.0))
       no_price_item.should_not be_valid
+    end
+
+    it "requires a location" do
+      no_loc_item = Item.new(@attr.merge(:location => ""))
+      no_loc_item.should_not be_valid
     end
     
   end

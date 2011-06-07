@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110603181853
+# Schema version: 20110607162341
 #
 # Table name: items
 #
@@ -8,12 +8,13 @@
 #  description :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  location    :string(255)
 #
 
 class Item < ActiveRecord::Base
-  attr_accessor :location
   attr_accessible :price, :description, :location
 
   validates(:description, :presence => true)
+  validates(:location, :presence => true)
   validates_numericality_of(:price, :greater_than => 0.0)
 end

@@ -36,11 +36,17 @@ describe ItemsController do
       get :stock
       response.should have_selector("input[name='item[price]'][type='text']")
     end
+
+    it "has a location field" do
+      get :stock
+      response.should have_selector("input[name='item[location]'][type='text']")
+    end
+
   end
 
   describe "POST 'create'" do
     before(:each) do
-      @attr = { :description => "Snicker's", :price => 0.85}
+      @attr = { :description => "Snicker's", :price => 0.85, :location => "A1"}
     end
     
     describe "success" do

@@ -71,7 +71,7 @@ describe PagesController do
 
       it "shows available items" do
         get 'vending_machine'
-        response.should have_selector("td", :content => "A1")
+        response.should have_selector("td", :content => "101")
         response.should have_selector("td", :content => "Snickers")
       end
 
@@ -79,6 +79,40 @@ describe PagesController do
         get 'vending_machine'
         response.should have_selector("tr", :count => 2)
       end 
+    end
+
+    describe "vending items" do
+      before(:each) do
+        @item = Factory(:item)
+        @attr = {:currentBalance => 5, :location => "101"}
+      end
+
+      it "has a vend location" do
+        get 'vending_machine'
+        response.should have_selector("input", :name => "location",
+                                     :type => "text")
+      end
+
+      it "does not vend if item doesn't exist in location" do
+        get 'vend', :currentBalance => "0.05", :location => "A1"
+        flash[:notice].should =~ /No item in that location/ 
+      end
+
+
+      it "does not vend if balance is too small" do
+        get 'vend', :currentBalance => "0.05", :location => "101"
+        flash[:notice].should =~ /Balance is too small/ 
+      end
+
+      it "vends item when location and price are correct" do
+        get 'vend', :currentBalance => "0.85", :location => "101"
+        flash[:notice].should =~ /Enjoy your snack/ 
+      end
+
+      it "vends item and provides change for large balances" do
+        get 'vend', :currentBalance => "1.00", :location => "101"
+        flash[:notice].should =~ /change/
+      end
     end
   end
 end

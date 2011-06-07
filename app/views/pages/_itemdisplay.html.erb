@@ -11,5 +11,12 @@
       <td><%= number_to_currency(item.price) %></td>
     </tr>
   <% end %>
+
 </table>
+<%= form_tag(vend_path, :method => 'get') do %>
+  <%= label_tag(:location, "Location") %>
+  <%= text_field_tag(:location) %>
+  <%= hidden_field_tag(:currentBalance, "0") %>
+  <%= submit_tag("Vend") %>
+<% end %>
 

@@ -5,6 +5,7 @@ VendingMachine::Application.routes.draw do
   match 'pages/coin_return' => 'pages#coin_return'
   match '/stock' => 'items#stock'
   match '/addstock' => 'items#addstock'
+  match '/vend' => 'pages#vend'
 
   root :to => 'pages#vending_machine'
 

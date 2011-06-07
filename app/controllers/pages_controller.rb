@@ -17,4 +17,22 @@ class PagesController < ApplicationController
     flash[:notice] = 'Coins returned'
     redirect_to root_url
   end
+
+  def vend
+    @balance = params[:currentBalance].to_f 
+    logger.info params[:location]
+    item = Item.find_by_location(params[:location])
+
+    if !item
+      flash[:notice] = "No item in that location"
+    else
+      if @balance < item.price
+        flash[:notice] = "Balance is too small"
+      elsif @balance == item.price
+        flash[:notice] = "Enjoy your snack"
+      else
+        flash[:notice] = "Enjoy your snack. Don't forget your change."
+      end
+    end
+  end
 end

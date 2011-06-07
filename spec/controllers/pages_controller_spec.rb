@@ -113,6 +113,12 @@ describe PagesController do
         get 'vend', :currentBalance => "1.00", :location => "101"
         flash[:notice].should =~ /change/
       end
+
+      it "deletes vended item from database" do
+        lambda do
+          get 'vend', :currentBalance => "0.85", :location => "101"
+        end.should change(Item, :count).by(-1)
+      end
     end
   end
 end

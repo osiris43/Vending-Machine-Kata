@@ -30,8 +30,10 @@ class PagesController < ApplicationController
         flash[:notice] = "Balance is too small"
       elsif @balance == item.price
         flash[:notice] = "Enjoy your snack"
+        item.delete
       else
         flash[:notice] = "Enjoy your snack. Don't forget your change."
+        item.delete
       end
     end
   end

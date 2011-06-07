@@ -1,0 +1,10 @@
+<h1>Items in the Vending Machine</h1>
+<%= flash[:notice] %>
+
+<ul>
+  <% @items.each do |k, v| %>
+    <li>
+    <%= v.count %> <%= k %>
+    </li>
+  <% end %>  
+</ul>

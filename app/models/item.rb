@@ -11,7 +11,8 @@
 #
 
 class Item < ActiveRecord::Base
-  attr_accessible :price, :description
+  attr_accessor :location
+  attr_accessible :price, :description, :location
 
   validates(:description, :presence => true)
   validates_numericality_of(:price, :greater_than => 0.0)

@@ -1,0 +1,16 @@
+<h1>Stock Items</h1>
+
+<%= form_for(@item) do |f| %>
+    <div>
+      <%= f.label :description%><br />
+      <%= f.text_field :description %>
+    </div>
+    <div>
+      <%= f.label :price %><br />
+      <%= f.text_field :price %>
+    </div>
+
+    <div>
+      <%= f.submit "Add Item" %>
+    </div>
+<% end %>

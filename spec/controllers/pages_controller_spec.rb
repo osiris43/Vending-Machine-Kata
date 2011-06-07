@@ -49,17 +49,36 @@ describe PagesController do
       get 'vending_machine'
       response.should have_selector("input", :type => "hidden", :value => "0")
     end
+
+    it "has link to stock items" do
+      get 'vending_machine'
+      response.should have_selector("a", :content => "Stock Items")
+    end
       
     describe "coin return behaviors" do
-      before(:each) do
-        #test_create_balance(0, 5)
-      end
-
       it "returns coins" do
         get 'coin_return', :params => {:currentBalance => 5}
         response.should redirect_to(root_url)
         flash[:notice].should =~ /Coins returned/
       end
     end 
+
+    describe "items display" do
+      before(:each) do
+        @item = Factory(:item)
+        item = Factory(:item)
+      end
+
+      it "shows available items" do
+        get 'vending_machine'
+        response.should have_selector("td", :content => "A1")
+        response.should have_selector("td", :content => "Snickers")
+      end
+
+      it "shows one row with multiple items" do
+        get 'vending_machine'
+        response.should have_selector("tr", :count => 2)
+      end 
+    end
   end
 end
